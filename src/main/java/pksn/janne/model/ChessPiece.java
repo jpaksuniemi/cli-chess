@@ -1,15 +1,23 @@
 package pksn.janne.model;
 
-import pksn.janne.model.ChessBoard.Column;
-
 public abstract class ChessPiece {
 
     private int currRow;
-    private Column currColumn;
+    private Character currColumn;
+    private final Color color;
 
-    public ChessPiece(int currRow, Column currColumn) {
+    public enum Color {
+        WHITE, BLACK
+    }
+
+    public ChessPiece(int currRow, Character currColumn, Color color) {
         this.currRow = currRow;
         this.currColumn = currColumn;
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public int getCurrRow() {
@@ -20,13 +28,13 @@ public abstract class ChessPiece {
         this.currRow = currRow;
     }
 
-    public Column getCurrColumn() {
+    public Character getCurrColumn() {
         return currColumn;
     }
 
-    public void setCurrColumn(Column currColumn) {
+    public void setCurrColumn(Character currColumn) {
         this.currColumn = currColumn;
     }
     
-    public abstract boolean isValidMove(int row, Column column);
+    public abstract boolean isValidMove(int row, Character column);
 }
