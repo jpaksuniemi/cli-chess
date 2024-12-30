@@ -1,74 +1,59 @@
 package pksn.janne.model;
 
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.Arrays;
+
+import pksn.janne.util.BoardHelper;
+import pksn.janne.util.ConstantValues;
 
 public class ChessBoard {
 
-    private static final int DEFAULT_SIZE = 8; 
     private ChessPiece[][] board;
     private int count;
 
-    private static final Map<Column, Integer> columnIndexMap = new EnumMap<>(Column.class);
-
-    public enum Column {
-        A,
-        B,
-        C,
-        D,
-        E,
-        F,
-        G,
-        H
-    }
-
-    static {
-        columnIndexMap.put(Column.A, 0);
-        columnIndexMap.put(Column.B, 1);
-        columnIndexMap.put(Column.C, 2);
-        columnIndexMap.put(Column.D, 3);
-        columnIndexMap.put(Column.E, 4);
-        columnIndexMap.put(Column.F, 5);
-        columnIndexMap.put(Column.G, 6);
-        columnIndexMap.put(Column.H, 7);
-    }
-
     public ChessBoard() {
-        board = new ChessPiece[DEFAULT_SIZE][DEFAULT_SIZE];
+        board = new ChessPiece[ConstantValues.DEFAULT_BOARD_SIZE][ConstantValues.DEFAULT_BOARD_SIZE];
         count = 0;
     }
 
-    public boolean add(ChessPiece piece, Column column, int row) {
-        if (null == piece || !isValidRow(row) || !columnIndexMap.containsKey(column)) {
+    public boolean add(ChessPiece piece, Character column, int row) {
+        if (null == piece || !BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             return false;
         }
-        board[row - 1][columnIndexMap.get(column)] = piece;
+        board[row - 1][BoardHelper.asInteger(column)] = piece;
         ++count;
         return true;
     }
 
-    public ChessPiece get(Column column, int row) {
-        if (!isValidRow(row) || !columnIndexMap.containsKey(column)) {
+    public ChessPiece get(Character column, int row) {
+        if (!BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             return null;
         }
-        return board[row][columnIndexMap.get(column)];
+        return board[row][BoardHelper.asInteger(column)];
     }
 
-    public boolean remove(ChessPiece piece, Column column, int row) {
-        if (null == piece || !isValidRow(row) || !columnIndexMap.containsKey(column)) {
+    public boolean remove(ChessPiece piece, Character column, int row) {
+        if (null == piece || !BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             return false;
         }
-        board[row - 1][columnIndexMap.get(column)] = null;
+        board[row - 1][BoardHelper.asInteger(column)] = null;
         --count;
         return true;
     }
 
-    private boolean isValidRow(int row) {
-        return 0 < row && row <= DEFAULT_SIZE;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        int i = 8;
+        for (ChessPiece[] chessPieces : board) {
+            sb.append(i + ". ").append(Arrays.toString(chessPieces)).append("\n");
+            --i;
+        }
+        sb.append("    A.    B.    C.    D.    E.    F.    G.    H.");
+        return sb.toString();
     }
 
     public void clear() {
-        board = new ChessPiece[DEFAULT_SIZE][DEFAULT_SIZE];
+        board = new ChessPiece[ConstantValues.DEFAULT_BOARD_SIZE][ConstantValues.DEFAULT_BOARD_SIZE];
         count = 0;
     }
 
