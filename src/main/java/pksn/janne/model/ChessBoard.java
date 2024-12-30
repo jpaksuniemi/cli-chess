@@ -39,7 +39,7 @@ public class ChessBoard {
     }
 
     public boolean add(ChessPiece piece, Column column, int row) {
-        if (null == piece || !isValidRow(row)) {
+        if (null == piece || !isValidRow(row) || !columnIndexMap.containsKey(column)) {
             return false;
         }
         board[row - 1][columnIndexMap.get(column)] = piece;
@@ -47,7 +47,7 @@ public class ChessBoard {
         return true;
     }
 
-    public ChessPiece at(Column column, int row) {
+    public ChessPiece get(Column column, int row) {
         if (!isValidRow(row) || !columnIndexMap.containsKey(column)) {
             return null;
         }
@@ -55,7 +55,7 @@ public class ChessBoard {
     }
 
     public boolean remove(ChessPiece piece, Column column, int row) {
-        if (null == piece || !isValidRow(row)) {
+        if (null == piece || !isValidRow(row) || !columnIndexMap.containsKey(column)) {
             return false;
         }
         board[row - 1][columnIndexMap.get(column)] = null;
