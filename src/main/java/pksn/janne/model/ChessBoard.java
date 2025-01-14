@@ -15,8 +15,8 @@ public class ChessBoard {
         count = 0;
     }
 
-    public boolean add(ChessPiece piece, Character column, int row) {
-        if (null == piece || !BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
+    public boolean add(ChessPiece piece, int row, Character column) {
+        if (!BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             return false;
         }
         board[row - 1][BoardHelper.asInteger(column)] = piece;
@@ -24,14 +24,14 @@ public class ChessBoard {
         return true;
     }
 
-    public ChessPiece get(Character column, int row) {
+    public ChessPiece get(int row, Character column) {
         if (!BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             return null;
         }
         return board[row][BoardHelper.asInteger(column)];
     }
 
-    public boolean remove(ChessPiece piece, Character column, int row) {
+    public boolean remove(ChessPiece piece, int row, Character column) {
         if (null == piece || !BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             return false;
         }
@@ -45,7 +45,7 @@ public class ChessBoard {
         StringBuilder sb = new StringBuilder();
         int i = 8;
         for (ChessPiece[] chessPieces : board) {
-            sb.append(i + ". ").append(Arrays.toString(chessPieces)).append("\n");
+            sb.append(i).append(". ").append(Arrays.toString(chessPieces)).append("\n");
             --i;
         }
         sb.append("    A.    B.    C.    D.    E.    F.    G.    H.");
