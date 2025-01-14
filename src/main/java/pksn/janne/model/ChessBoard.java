@@ -28,7 +28,7 @@ public class ChessBoard {
         if (!BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             return null;
         }
-        return board[row][BoardHelper.asInteger(column)];
+        return board[row - 1][BoardHelper.asInteger(column)];
     }
 
     public boolean remove(ChessPiece piece, int row, Character column) {
@@ -43,10 +43,10 @@ public class ChessBoard {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        int i = 8;
-        for (ChessPiece[] chessPieces : board) {
-            sb.append(i).append(". ").append(Arrays.toString(chessPieces)).append("\n");
-            --i;
+        int rowIndex = 8;
+        for (int i = ConstantValues.DEFAULT_BOARD_SIZE - 1; i >= 0; i--) {
+            sb.append(rowIndex).append(". ").append(Arrays.toString(board[i])).append("\n");
+            --rowIndex;
         }
         sb.append("    A.    B.    C.    D.    E.    F.    G.    H.");
         return sb.toString();
