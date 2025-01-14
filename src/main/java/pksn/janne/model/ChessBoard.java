@@ -45,10 +45,17 @@ public class ChessBoard {
         StringBuilder sb = new StringBuilder();
         int rowIndex = 8;
         for (int i = ConstantValues.DEFAULT_BOARD_SIZE - 1; i >= 0; i--) {
-            sb.append(rowIndex).append(". ").append(Arrays.toString(board[i])).append("\n");
+            sb.append(rowIndex).append(". |");
+            for (int j = 0; j < ConstantValues.DEFAULT_BOARD_SIZE; j++) {
+                sb.append( (board[i][j] != null) ? board[i][j] : "    ");
+                if (j != ConstantValues.DEFAULT_BOARD_SIZE - 1) {
+                    sb.append("|");
+                }
+            }
+            sb.append("|\n");
             --rowIndex;
         }
-        sb.append("    A.    B.    C.    D.    E.    F.    G.    H.");
+        sb.append("   A.   B.   C.   D.   E.   F.   G.   H.");
         return sb.toString();
     }
 
