@@ -9,12 +9,30 @@ public class PieceController {
 
     public static boolean moveChessPiece(ChessPiece piece, int row, Character column) {
         if (!piece.isValidMove(row, column)) { return false; }
-        boolean test = canTakePiece(piece, board.get(row, column));
+        if (!isHorizontallyClear(piece, row, column)) { return false; }
         if (board.get(row, column) != null && !canTakePiece(piece, board.get(row, column))) { return false; }
         board.add(null, piece.getCurrRow(), piece.getCurrColumn());
         board.add(piece, row, column);
         piece.setCurrRow(row);
         piece.setCurrColumn(column);
+        return true;
+    }
+
+    private static boolean isHorizontallyClear(ChessPiece piece, int row, Character column) {
+        char tempCol = piece.getCurrColumn();
+        while (tempCol != column) {
+            if (tempCol < column) {
+                tempCol++;
+            } else {
+                tempCol--;
+            }
+            if (Math.abs(tempCol - column) == 0) {
+                break;
+            }
+            if (board.get(row, tempCol) != null) {
+                return false;
+            }
+        }
         return true;
     }
 
