@@ -36,6 +36,24 @@ public class PieceController {
         return true;
     }
 
+    private static boolean isVerticallyClear(ChessPiece piece, int row, Character column) {
+        int tempRow  = piece.getCurrRow();
+        while (tempRow != row) {
+            if (tempRow < row) {
+                tempRow++;
+            } else {
+                tempRow--;
+            }
+            if (Math.abs(tempRow - row) == 0) {
+                break;
+            }
+            if (board.get(tempRow, column) != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static boolean canTakePiece(ChessPiece taker, ChessPiece toBeTaken) {
         return taker.getColor() != toBeTaken.getColor();
     }
