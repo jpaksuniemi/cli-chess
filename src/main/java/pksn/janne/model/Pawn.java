@@ -20,9 +20,14 @@ public class Pawn extends ChessPiece {
             return false;
         }
         if (color == Color.WHITE && moveDirection < 0 || color == Color.BLACK && moveDirection > 0) {
-            hasMoved = false;
+            hasMoved = true;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Pawn";
     }
 }
