@@ -27,6 +27,6 @@ public class InvalidMoveException extends Exception {
 
     @Override
     public String getMessage() {
-        return String.format("%s, in %c%d", codeAsString(), column, row);
+        return String.format("%s, in move %c%d", codeAsString(), Character.toLowerCase(column), row);
     }
 }
