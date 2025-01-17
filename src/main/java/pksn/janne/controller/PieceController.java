@@ -37,7 +37,7 @@ public class PieceController {
     }
 
     private static boolean canTakePiece(ChessPiece taker, ChessPiece toBeTaken) {
-        return toBeTaken != null && taker.getColor() != toBeTaken.getColor();
+        return taker.getColor() != toBeTaken.getColor();
     }
 
     public static void setBoard(ChessBoard chessBoard) {
