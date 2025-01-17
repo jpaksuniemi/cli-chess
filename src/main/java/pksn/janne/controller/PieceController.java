@@ -2,20 +2,38 @@ package pksn.janne.controller;
 
 import pksn.janne.model.ChessBoard;
 import pksn.janne.model.ChessPiece;
+import pksn.janne.model.MovementType;
+import pksn.janne.model.OrthogonalMovement;
 
 public class PieceController {
 
     private static ChessBoard board;
 
-    public static boolean moveChessPiece(ChessPiece piece, int row, Character column) {
-        if (!piece.isValidMove(row, column)) { return false; }
-        if (!isHorizontallyClear(piece, row, column)) { return false; }
-        if (board.get(row, column) != null && !canTakePiece(piece, board.get(row, column))) { return false; }
+    public static void moveChessPiece(ChessPiece piece, int row, Character column) throws InvalidMoveException {
+        if (!piece.isValidMove(row, column)) {
+            throw new InvalidMoveException("", row, column, InvalidMoveException.NOT_A_VALID_MOVE);
+        }
+        if (!isClear(piece, row, column)) {
+            throw new InvalidMoveException("", row, column, InvalidMoveException.CHESS_PIECE_IN_THE_WAY);
+        }
+        if (board.get(row, column) != null && !canTakePiece(piece, board.get(row, column))) {
+            throw new InvalidMoveException("", row, column, InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR);
+        }
         board.add(null, piece.getCurrRow(), piece.getCurrColumn());
         board.add(piece, row, column);
         piece.setCurrRow(row);
         piece.setCurrColumn(column);
-        return true;
+    }
+
+    private static boolean isClear(ChessPiece piece, int row, Character column) {
+        MovementType type = piece.getMovementType();
+        if (type instanceof OrthogonalMovement) {
+            boolean isHorizontal = piece.getCurrRow() == row;
+            boolean isVertical = piece.getCurrColumn() == column;
+            if (isHorizontal) { return isHorizontallyClear(piece, row, column); }
+            if (isVertical) { return isVerticallyClear(piece, row, column); }
+        }
+        return false;
     }
 
     private static boolean isHorizontallyClear(ChessPiece piece, int row, Character column) {
