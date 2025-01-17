@@ -9,12 +9,13 @@ import pksn.janne.model.ChessBoard;
 import pksn.janne.model.ChessPiece;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PieceControllerTests {
 
     @Test
     @DisplayName("Testing moveChessPiece() validity")
-    void testMoveValidity() {
+    void testMoveValidity() throws Exception {
         ChessBoard board = new ChessBoard();
         PieceController.setBoard(board);
         ChessPiece rook1 = ChessPieceFactory.createRook(ChessPiece.Color.WHITE, 1, 'A');
@@ -29,36 +30,28 @@ public class PieceControllerTests {
         board.add(rook4, rook4.getCurrRow(), rook4.getCurrColumn());
         board.add(rook5, rook5.getCurrRow(), rook5.getCurrColumn());
 
+        InvalidMoveException e = assertThrows(InvalidMoveException.class, () ->
+                PieceController.moveChessPiece(rook1, 1, 'H'));
 
-        System.out.println("Horizontal checks");
-        try {
-            PieceController.moveChessPiece(rook1, 1, 'H');
-        } catch (InvalidMoveException e) {
-            assertEquals(InvalidMoveException.CHESS_PIECE_IN_THE_WAY, e.code, "Should throw error regarding chess piece in the way");
-        }
+        assertEquals(InvalidMoveException.CHESS_PIECE_IN_THE_WAY, e.code, "Should throw error regarding chess piece in the way");
 
-        try {
-            PieceController.moveChessPiece(rook3, 2,'D');
-            PieceController.moveChessPiece(rook1, 1, 'H');
-        } catch (InvalidMoveException e) {
-            assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding taking chess piece of same color");
-        }
+        PieceController.moveChessPiece(rook3, 2,'D');
 
-        System.out.println("Vertical checks");
-        try {
-            PieceController.moveChessPiece(rook1, 5, 'A');
-        } catch (InvalidMoveException e) {
-            assertEquals(InvalidMoveException.CHESS_PIECE_IN_THE_WAY, e.code, "Should throw error regarding chess piece in the way");
-        }
+        e = assertThrows(InvalidMoveException.class, () ->
+                PieceController.moveChessPiece(rook1, 1, 'H'));
 
-        try {
-            PieceController.moveChessPiece(rook4, 3, 'B');
-            PieceController.moveChessPiece(rook1, 5, 'A');
-        } catch (InvalidMoveException e) {
-            assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding chess piece in the way");
-        }
+        assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding taking chess piece of same color");
 
-        System.out.println(board);
+        e = assertThrows(InvalidMoveException.class, () ->
+                PieceController.moveChessPiece(rook1, 5, 'A'));
 
+        assertEquals(InvalidMoveException.CHESS_PIECE_IN_THE_WAY, e.code, "Should throw error regarding chess piece in the way");
+
+        PieceController.moveChessPiece(rook4, 3, 'B');
+
+        e = assertThrows(InvalidMoveException.class, () ->
+                PieceController.moveChessPiece(rook1, 5, 'A'));
+
+        assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding chess piece in the way");
     }
 }
