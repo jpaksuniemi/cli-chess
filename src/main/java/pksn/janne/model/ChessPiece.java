@@ -2,18 +2,20 @@ package pksn.janne.model;
 
 public abstract class ChessPiece {
 
-    private int currRow;
-    private Character currColumn;
-    private final Color color;
+    protected int currRow;
+    protected Character currColumn;
+    protected final Color color;
+    protected final MovementType movementType;
 
     public enum Color {
         WHITE, BLACK
     }
 
-    public ChessPiece(int currRow, Character currColumn, Color color) {
+    public ChessPiece(int currRow, Character currColumn, Color color, MovementType movementType) {
         this.currRow = currRow;
         this.currColumn = currColumn;
         this.color = color;
+        this.movementType = movementType;
     }
 
     public Color getColor() {
@@ -37,4 +39,8 @@ public abstract class ChessPiece {
     }
     
     public abstract boolean isValidMove(int row, Character column);
+
+    public MovementType getMovementType() {
+        return movementType;
+    }
 }
