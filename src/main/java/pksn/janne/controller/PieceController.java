@@ -1,9 +1,6 @@
 package pksn.janne.controller;
 
-import pksn.janne.model.ChessBoard;
-import pksn.janne.model.ChessPiece;
-import pksn.janne.model.MovementType;
-import pksn.janne.model.OrthogonalMovement;
+import pksn.janne.model.*;
 
 public class PieceController {
 
@@ -27,7 +24,7 @@ public class PieceController {
 
     private static boolean isClear(ChessPiece piece, int row, Character column) {
         MovementType type = piece.getMovementType();
-        if (type instanceof OrthogonalMovement) {
+        if (type instanceof OrthogonalMovement || type instanceof ForwardMovement) {
             boolean isHorizontal = piece.getCurrRow() == row;
             boolean isVertical = piece.getCurrColumn() == column;
             if (isHorizontal) { return isHorizontallyClear(piece, row, column); }
