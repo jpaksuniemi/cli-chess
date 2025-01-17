@@ -19,7 +19,7 @@ public class Pawn extends ChessPiece {
         if (moveDistance > 2 || moveDistance == 2 && hasMoved) {
             return false;
         }
-        if (color == Color.WHITE && moveDirection < 0 || color == Color.BLACK && moveDirection > 0) {
+        if (color == Color.BLACK && moveDirection < 0 || color == Color.WHITE && moveDirection > 0) {
             hasMoved = true;
             return true;
         }
