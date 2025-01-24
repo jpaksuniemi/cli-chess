@@ -29,6 +29,8 @@ public class PieceController {
             boolean isVertical = piece.getCurrColumn() == column;
             if (isHorizontal) { return isHorizontallyClear(piece, row, column); }
             if (isVertical) { return isVerticallyClear(piece, row, column); }
+        } else if (type instanceof DiagonalMovement) {
+            return isDiagonallyClear(piece, row, column);
         }
         return false;
     }
@@ -45,6 +47,30 @@ public class PieceController {
                 break;
             }
             if (board.get(row, tempCol) != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isDiagonallyClear(ChessPiece piece, int row, Character column) {
+        char tempCol = piece.getCurrColumn();
+        int tempRow = piece.getCurrRow();
+        while (tempCol != column && tempRow != row) {
+            if (tempCol < column) {
+                tempCol++;
+            } else {
+                tempCol--;
+            }
+            if (tempRow < row) {
+                tempRow++;
+            } else {
+                tempRow--;
+            }
+            if (Math.abs(tempCol - column) == 0) {
+                break;
+            }
+            if (board.get(tempRow, tempCol) != null) {
                 return false;
             }
         }
