@@ -22,4 +22,7 @@ public class ChessPieceFactory {
         return new Queen(row, column, color);
     }
 
+    public static ChessPiece createKing(ChessPiece.Color color, int row, Character column) {
+        return new King(row, column, color);
+    }
 }
