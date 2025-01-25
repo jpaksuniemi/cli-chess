@@ -24,9 +24,9 @@ public class BishopTests {
             for (char c = 'A'; c <= ConstantValues.UPPERCASE_H_ASCII_VALUE; c++) {
                 if (Math.abs(bishop.getCurrRow() - i) == Math.abs(bishop.getCurrColumn() - c)) {
                     assertTrue(bishop.isValidMove(i, c), "Diagonal movement should be valid");
-                    continue;
+                } else {
+                    assertFalse(bishop.isValidMove(i, c), "Non-diagonal movement should be invalid");
                 }
-                assertFalse(bishop.isValidMove(i, c), "Non-diagonal movement should be invalid");
             }
         }
 

@@ -34,9 +34,9 @@ public class PawnTests {
                             ? "White pawn should be able to move max 2 tiles before having moved at all"
                             : "White pawn can move only 1 tile forward after moving once";
                     assertTrue(pawn.isValidMove(row, col), message);
-                    continue;
+                } else {
+                    assertFalse(pawn.isValidMove(row, col), "White pawn shouldn't be able to move anywhere else than up the board");
                 }
-                assertFalse(pawn.isValidMove(row, col), "White pawn shouldn't be able to move anywhere else than up the board");
             }
         }
 
@@ -54,9 +54,9 @@ public class PawnTests {
                             ? "Black pawn should be able to move max 2 tiles before having moved at all"
                             : "Black pawn can move only 1 tile forward after moving once";
                     assertTrue(pawn.isValidMove(row, col), message);
-                    continue;
+                } else {
+                    assertFalse(pawn.isValidMove(row, col), "Black pawn shouldn't be able to move anywhere else than down the board");
                 }
-                assertFalse(pawn.isValidMove(row, col), "Black pawn shouldn't be able to move anywhere else than down the board");
             }
         }
     }
