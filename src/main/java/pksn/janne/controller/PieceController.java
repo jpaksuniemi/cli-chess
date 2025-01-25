@@ -16,6 +16,9 @@ public class PieceController {
         if (board.get(row, column) != null && !canTakePiece(piece, board.get(row, column))) {
             throw new InvalidMoveException("", row, column, InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR);
         }
+        if (piece instanceof Pawn pawn) {
+            pawn.setHasMoved(true);
+        }
         board.add(null, piece.getCurrRow(), piece.getCurrColumn());
         board.add(piece, row, column);
         piece.setCurrRow(row);
