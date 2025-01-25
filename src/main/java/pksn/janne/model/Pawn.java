@@ -19,11 +19,11 @@ public class Pawn extends ChessPiece {
         if (moveDistance > 2 || moveDistance == 2 && hasMoved) {
             return false;
         }
-        if (color == Color.BLACK && moveDirection < 0 || color == Color.WHITE && moveDirection > 0) {
-            hasMoved = true;
-            return true;
-        }
-        return false;
+        return color == Color.BLACK && moveDirection < 0 || color == Color.WHITE && moveDirection > 0;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
     }
 
     @Override
