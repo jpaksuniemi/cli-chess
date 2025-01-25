@@ -26,19 +26,14 @@ public class PieceController {
     }
 
     private static boolean isClear(ChessPiece piece, int row, Character column) {
-        MovementType type = piece.getMovementType();
-        if (type instanceof OrthogonalMovement || type instanceof ForwardMovement) {
-            boolean isHorizontal = piece.getCurrRow() == row;
-            boolean isVertical = piece.getCurrColumn() == column;
-            if (isHorizontal) { return isHorizontallyClear(piece, row, column); }
-            if (isVertical) { return isVerticallyClear(piece, row, column); }
-        } else if (type instanceof DiagonalMovement) {
-            return isDiagonallyClear(piece, row, column);
-        }
+        if (piece.getCurrRow() == row) return isHorizontallyClear(piece, row, column);
+        if (piece.getCurrColumn() == column) return isVerticallyClear(piece, row, column);
+        if (Math.abs(piece.getCurrRow() - row) == Math.abs(piece.getCurrColumn() - column)) return isDiagonallyClear(piece, row, column);
         return false;
     }
 
     private static boolean isHorizontallyClear(ChessPiece piece, int row, Character column) {
+        System.out.println("Horizontally clear");
         char tempCol = piece.getCurrColumn();
         while (tempCol != column) {
             if (tempCol < column) {
@@ -57,6 +52,7 @@ public class PieceController {
     }
 
     private static boolean isDiagonallyClear(ChessPiece piece, int row, Character column) {
+        System.out.println("Diagonally clear");
         char tempCol = piece.getCurrColumn();
         int tempRow = piece.getCurrRow();
         while (tempCol != column && tempRow != row) {
@@ -81,6 +77,7 @@ public class PieceController {
     }
 
     private static boolean isVerticallyClear(ChessPiece piece, int row, Character column) {
+        System.out.println("Vertically clear");
         int tempRow  = piece.getCurrRow();
         while (tempRow != row) {
             if (tempRow < row) {
