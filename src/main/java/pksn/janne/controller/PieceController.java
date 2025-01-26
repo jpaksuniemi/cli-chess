@@ -1,12 +1,28 @@
 package pksn.janne.controller;
 
 import pksn.janne.model.*;
+import pksn.janne.util.ConstantValues;
 
 public class PieceController {
 
     private static ChessBoard board;
 
     public static boolean moveChessPiece(ChessPiece piece, int row, Character column) throws InvalidMoveException {
+        validateMove(piece, row, column);
+        if (piece instanceof Pawn pawn) {
+            pawn.setHasMoved(true);
+        }
+        board.add(null, piece.getCurrRow(), piece.getCurrColumn());
+        board.add(piece, row, column);
+        piece.setCurrRow(row);
+        piece.setCurrColumn(column);
+        return true;
+    }
+
+    private static void validateMove(ChessPiece piece, int row, Character column) throws InvalidMoveException {
+        if (!isInBounds(row, column)) {
+            throw new InvalidMoveException(piece, piece.getCurrRow(), piece.getCurrColumn(), row, column, InvalidMoveException.OUT_OF_BOUNDS);
+        }
         if (!piece.isValidMove(row, column)) {
             throw new InvalidMoveException(piece, piece.getCurrRow(), piece.getCurrColumn(), row, column, InvalidMoveException.NOT_A_VALID_MOVE);
         }
@@ -16,14 +32,10 @@ public class PieceController {
         if (board.get(row, column) != null && !canTakePiece(piece, board.get(row, column))) {
             throw new InvalidMoveException(piece, piece.getCurrRow(), piece.getCurrColumn(), row, column, InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR);
         }
-        if (piece instanceof Pawn pawn) {
-            pawn.setHasMoved(true);
-        }
-        board.add(null, piece.getCurrRow(), piece.getCurrColumn());
-        board.add(piece, row, column);
-        piece.setCurrRow(row);
-        piece.setCurrColumn(column);
-        return true;
+    }
+
+    private static boolean isInBounds(int row, int column) {
+        return row > 0 && row <= ConstantValues.DEFAULT_BOARD_SIZE && column >= ConstantValues.UPPERCASE_A_ASCII_VALUE && column <= ConstantValues.UPPERCASE_H_ASCII_VALUE;
     }
 
     private static boolean isClear(ChessPiece piece, int row, Character column) {

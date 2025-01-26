@@ -6,6 +6,7 @@ public class InvalidMoveException extends Exception {
     public static final int CHESS_PIECE_IN_THE_WAY = -1;
     public static final int CHESS_PIECE_IS_SAME_COLOR = -2;
     public static final int NOT_A_VALID_MOVE = -3;
+    public static final int OUT_OF_BOUNDS = -4;
 
     public final int code;
     private final ChessPiece piece;
@@ -29,6 +30,7 @@ public class InvalidMoveException extends Exception {
             case CHESS_PIECE_IN_THE_WAY -> "Another chess piece obstructs the move";
             case CHESS_PIECE_IS_SAME_COLOR -> "Chess piece can't be taken since it is of the same color";
             case NOT_A_VALID_MOVE -> "Not a valid move for the chess piece";
+            case OUT_OF_BOUNDS -> "Out of bounds";
             default -> "Unknown error";
         };
     }

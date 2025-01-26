@@ -52,6 +52,11 @@ public class PieceControllerTests {
                 PieceController.moveChessPiece(rook1, 5, 'A'));
 
         assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding chess piece in the way");
+
+        e = assertThrows(InvalidMoveException.class, () ->
+                PieceController.moveChessPiece(rook1, 5, 'I'));
+
+        assertEquals(InvalidMoveException.OUT_OF_BOUNDS, e.code, "Should throw error regarding moving piece out of bounds");
     }
 
     @Test
