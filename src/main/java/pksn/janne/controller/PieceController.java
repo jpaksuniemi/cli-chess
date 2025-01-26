@@ -6,7 +6,7 @@ public class PieceController {
 
     private static ChessBoard board;
 
-    public static void moveChessPiece(ChessPiece piece, int row, Character column) throws InvalidMoveException {
+    public static boolean moveChessPiece(ChessPiece piece, int row, Character column) throws InvalidMoveException {
         if (!piece.isValidMove(row, column)) {
             throw new InvalidMoveException(piece, piece.getCurrRow(), piece.getCurrColumn(), row, column, InvalidMoveException.NOT_A_VALID_MOVE);
         }
@@ -23,6 +23,7 @@ public class PieceController {
         board.add(piece, row, column);
         piece.setCurrRow(row);
         piece.setCurrColumn(column);
+        return true;
     }
 
     private static boolean isClear(ChessPiece piece, int row, Character column) {

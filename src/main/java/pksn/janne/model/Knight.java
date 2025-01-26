@@ -10,4 +10,9 @@ public class Knight extends ChessPiece{
     public boolean isValidMove(int row, Character column) {
         return movementType.isValidMove(currRow, currColumn, row, column);
     }
+
+    @Override
+    public String toString() {
+        return "K";
+    }
 }
