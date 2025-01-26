@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class KnightTests {
 
-    private static final int[] rowMoves = {-2, -2, -1, -1, 1, 2, 2, 2};
+    private static final int[] rowMoves = {-2, -2, -1, -1, 1, 1, 2, 2};
     private static final int[] colMoves = {-1, 1, -2, 2, -2, 2, -1, 1};
 
     @Test

@@ -2,7 +2,7 @@ package pksn.janne.model;
 
 public class LTypeMovement implements MovementType {
 
-    private final int[] rowMoves = {-2, -2, -1, -1, 1, 2, 2, 2};
+    private final int[] rowMoves = {-2, -2, -1, -1, 1, 1, 2, 2};
     private final int[] colMoves = {-1, 1, -2, 2, -2, 2, -1, 1};
 
     @Override
