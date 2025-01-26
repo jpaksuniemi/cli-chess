@@ -25,4 +25,8 @@ public class ChessPieceFactory {
     public static ChessPiece createKing(ChessPiece.Color color, int row, Character column) {
         return new King(row, column, color);
     }
+
+    public static ChessPiece createKnight(ChessPiece.Color color, int row, Character column) {
+        return new Knight(row, column, color);
+    }
 }
