@@ -13,18 +13,21 @@ public class ChessBoard {
         count = 0;
     }
 
-    public boolean add(ChessPiece piece, int row, Character column) {
+    /*
+    * @param piece  Can be null to signify empty spot on the board
+    * */
+    public boolean add(ChessPiece piece, int row, Character column) throws IllegalArgumentException {
         if (!BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
-            return false;
+            throw new IllegalArgumentException("Invalid row or column");
         }
         board[row - 1][BoardHelper.asInteger(column)] = piece;
         ++count;
         return true;
     }
 
-    public ChessPiece get(int row, Character column) {
+    public ChessPiece get(int row, Character column) throws IllegalArgumentException {
         if (!BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
-            return null;
+            throw new IllegalArgumentException("Invalid row or column");
         }
         return board[row - 1][BoardHelper.asInteger(column)];
     }
