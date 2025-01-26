@@ -8,13 +8,13 @@ public class PieceController {
 
     public static void moveChessPiece(ChessPiece piece, int row, Character column) throws InvalidMoveException {
         if (!piece.isValidMove(row, column)) {
-            throw new InvalidMoveException("", row, column, InvalidMoveException.NOT_A_VALID_MOVE);
+            throw new InvalidMoveException(piece, piece.getCurrRow(), piece.getCurrColumn(), row, column, InvalidMoveException.NOT_A_VALID_MOVE);
         }
-        if (!isClear(piece, row, column)) {
-            throw new InvalidMoveException("", row, column, InvalidMoveException.CHESS_PIECE_IN_THE_WAY);
+        if (!isClear(piece, row, column) && !(piece instanceof Knight)) {
+            throw new InvalidMoveException(piece, piece.getCurrRow(), piece.getCurrColumn(), row, column, InvalidMoveException.CHESS_PIECE_IN_THE_WAY);
         }
         if (board.get(row, column) != null && !canTakePiece(piece, board.get(row, column))) {
-            throw new InvalidMoveException("", row, column, InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR);
+            throw new InvalidMoveException(piece, piece.getCurrRow(), piece.getCurrColumn(), row, column, InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR);
         }
         if (piece instanceof Pawn pawn) {
             pawn.setHasMoved(true);

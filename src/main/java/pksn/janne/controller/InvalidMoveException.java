@@ -1,18 +1,26 @@
 package pksn.janne.controller;
 
+import pksn.janne.model.ChessPiece;
+
 public class InvalidMoveException extends Exception {
     public static final int CHESS_PIECE_IN_THE_WAY = -1;
     public static final int CHESS_PIECE_IS_SAME_COLOR = -2;
     public static final int NOT_A_VALID_MOVE = -3;
 
     public final int code;
-    private final int row;
-    private final char column;
+    private final ChessPiece piece;
+    private final int startRow;
+    private final char startCol;
+    private final int endRow;
+    private final char endColumn;
 
-    public InvalidMoveException(String message, int row, char column, int code) {
-        super(message);
-        this.row = row;
-        this.column = column;
+    public InvalidMoveException(ChessPiece piece, int startRow, char startCol, int endRow, char endColumn, int code) {
+        super("");
+        this.piece = piece;
+        this.startRow = startRow;
+        this.startCol = startCol;
+        this.endRow = endRow;
+        this.endColumn = endColumn;
         this.code = code;
     }
 
@@ -27,6 +35,7 @@ public class InvalidMoveException extends Exception {
 
     @Override
     public String getMessage() {
-        return String.format("%s, in move %c%d", codeAsString(), Character.toLowerCase(column), row);
+        return String.format("%s, in move %s%c%d%c%d", codeAsString(),
+                piece, Character.toLowerCase(startCol), startRow, Character.toLowerCase(endColumn), endRow);
     }
 }
