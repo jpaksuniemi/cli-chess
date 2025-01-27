@@ -1,6 +1,7 @@
 package pksn.janne.controller;
 
 import pksn.janne.model.*;
+import pksn.janne.model.CheckDetector;
 import pksn.janne.util.ConstantValues;
 
 public class PieceController {
@@ -32,6 +33,11 @@ public class PieceController {
         }
         if (board.get(row, column) != null && !canCapturePiece(piece, board.get(row, column))) {
             throw new InvalidMoveException(piece, piece.getCurrRow(), piece.getCurrColumn(), row, column, InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR);
+        }
+        if (piece instanceof King king) {
+            if (CheckDetector.detectCheck(row, column, king.getColor(), board)) {
+                throw new InvalidMoveException(king, king.getCurrRow(), king.getCurrColumn(), row, column, InvalidMoveException.CHECKED_TILE);
+            }
         }
     }
 
