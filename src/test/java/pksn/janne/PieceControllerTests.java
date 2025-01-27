@@ -29,6 +29,7 @@ public class PieceControllerTests {
         board.add(rook4, rook4.getCurrRow(), rook4.getCurrColumn());
         board.add(rook5, rook5.getCurrRow(), rook5.getCurrColumn());
 
+        // Horizontal clear check
         InvalidMoveException e = assertThrows(InvalidMoveException.class, () ->
                 PieceController.moveChessPiece(rook1, 1, 'H'));
 
@@ -39,7 +40,7 @@ public class PieceControllerTests {
         e = assertThrows(InvalidMoveException.class, () ->
                 PieceController.moveChessPiece(rook1, 1, 'H'));
 
-        assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding taking chess piece of same color");
+        assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding capturing chess piece of same color");
 
         e = assertThrows(InvalidMoveException.class, () ->
                 PieceController.moveChessPiece(rook1, 5, 'A'));
@@ -51,7 +52,7 @@ public class PieceControllerTests {
         e = assertThrows(InvalidMoveException.class, () ->
                 PieceController.moveChessPiece(rook1, 5, 'A'));
 
-        assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding chess piece in the way");
+        assertEquals(InvalidMoveException.CHESS_PIECE_IS_SAME_COLOR, e.code, "Should throw error regarding capturing chess piece of the same color");
 
         e = assertThrows(InvalidMoveException.class, () ->
                 PieceController.moveChessPiece(rook1, 5, 'I'));
