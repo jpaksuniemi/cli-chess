@@ -3,7 +3,7 @@ package pksn.janne.model;
 public abstract class ChessPiece {
 
     protected int currRow;
-    protected Character currColumn;
+    protected char currColumn;
     protected final Color color;
     protected final MovementType movementType;
 
@@ -11,7 +11,7 @@ public abstract class ChessPiece {
         WHITE, BLACK
     }
 
-    public ChessPiece(int currRow, Character currColumn, Color color, MovementType movementType) {
+    public ChessPiece(int currRow, char currColumn, Color color, MovementType movementType) {
         this.currRow = currRow;
         this.currColumn = currColumn;
         this.color = color;
@@ -30,15 +30,15 @@ public abstract class ChessPiece {
         this.currRow = currRow;
     }
 
-    public Character getCurrColumn() {
+    public char getCurrColumn() {
         return currColumn;
     }
 
-    public void setCurrColumn(Character currColumn) {
+    public void setCurrColumn(char currColumn) {
         this.currColumn = currColumn;
     }
     
-    public abstract boolean isValidMove(int row, Character column);
+    public abstract boolean isValidMove(int row, char column);
 
     public MovementType getMovementType() {
         return movementType;

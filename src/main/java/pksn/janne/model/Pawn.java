@@ -10,7 +10,7 @@ public class Pawn extends ChessPiece {
     }
 
     @Override
-    public boolean isValidMove(int row, Character column) {
+    public boolean isValidMove(int row, char column) {
         if (!movementType.isValidMove(currRow, currColumn, row, column)) {
             return false;
         }

@@ -2,12 +2,12 @@ package pksn.janne.model;
 
 public class Rook extends ChessPiece {
 
-    public Rook(int row, Character column, Color color) {
+    public Rook(int row, char column, Color color) {
         super(row, column, color, new OrthogonalMovement());
     }
 
     @Override
-    public boolean isValidMove(int row, Character column) {
+    public boolean isValidMove(int row, char column) {
         return movementType.isValidMove(currRow, currColumn, row, column);
     }
 

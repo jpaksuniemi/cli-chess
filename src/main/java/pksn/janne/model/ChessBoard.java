@@ -16,7 +16,7 @@ public class ChessBoard {
     /*
     * @param piece  Can be null to signify empty spot on the board
     * */
-    public boolean add(ChessPiece piece, int row, Character column) throws IllegalArgumentException {
+    public boolean add(ChessPiece piece, int row, char column) throws IllegalArgumentException {
         if (!BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             throw new IllegalArgumentException("Invalid row or column");
         }
@@ -25,14 +25,14 @@ public class ChessBoard {
         return true;
     }
 
-    public ChessPiece get(int row, Character column) throws IllegalArgumentException {
+    public ChessPiece get(int row, char column) throws IllegalArgumentException {
         if (!BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             throw new IllegalArgumentException("Invalid row or column");
         }
         return board[row - 1][BoardHelper.asInteger(column)];
     }
 
-    public boolean remove(ChessPiece piece, int row, Character column) {
+    public boolean remove(ChessPiece piece, int row, char column) {
         if (null == piece || !BoardHelper.isValidRow(row) || !BoardHelper.isValidColumn(column)) {
             return false;
         }

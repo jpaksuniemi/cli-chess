@@ -8,7 +8,7 @@ public class Queen extends ChessPiece {
     }
 
     @Override
-    public boolean isValidMove(int row, Character column) {
+    public boolean isValidMove(int row, char column) {
         return movementType.isValidMove(currRow, currColumn, row, column);
     }
 
