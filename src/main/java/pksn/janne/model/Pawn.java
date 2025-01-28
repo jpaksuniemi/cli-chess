@@ -6,7 +6,7 @@ public class Pawn extends ChessPiece {
     // TODO: en passant
 
     public Pawn(int row, Character column, Color color) {
-        super(row, column, color, new ForwardMovement());
+        super(row, column, color, new PawnMovement());
     }
 
     @Override
